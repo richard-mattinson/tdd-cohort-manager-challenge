@@ -18,10 +18,8 @@ class CohortManager {
     return false
   }
 
+  // Has this created a cohort, or just a string? Do I need to create an  object for the cohort name and array for the students?
   createCohort(name) {
-    // (for loop) does cohort already exist?
-    // - (if) NO, add cohort to array
-    // - (if) YES, return error
     const existingCohort = this.findCohort(name)
     if (!existingCohort) {
       this.cohorts.push(name)
@@ -31,6 +29,31 @@ class CohortManager {
       return `${name} already exists`
     }
   }
+
+  // is this accessing the students array?
+  // findStudent(givenName, familyName) {
+    
+  //   for (let index = 0; index < this.cohorts[students].length; index++) {
+  //     if (
+  //       this.cohorts[index].givenName === givenName &&
+  //       this.cohorts[index].familyName === familyName
+  //     ) {
+  //       return givenName, familyName
+  //     }
+  //   }
+  //   return false
+  // }
+
+  // createStudent(givenName, familyName) {
+  //   const existingStudent = this.findStudent(givenName, familyName)
+  //   if (!existingStudent) {
+  //     this.cohorts.push(givenName, familyName)
+  //     const lastElement = this.cohorts.students[].length - 1
+  //     return this.cohorts[lastElement]
+  //   } else {
+  //     return `${givenName} ${familyName} already exists`
+  //   }
+  // }
 }
 
 module.exports = CohortManager
