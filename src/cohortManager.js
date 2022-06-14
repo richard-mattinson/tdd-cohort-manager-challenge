@@ -1,6 +1,7 @@
 class CohortManager {
   constructor() {
     this.cohorts = []
+    this.students = []
   }
 
   getCohorts() {
@@ -18,9 +19,9 @@ class CohortManager {
     return false
   }
 
-  // Has this created a cohort, or just a string? Do I need to create an  object for the cohort name and array for the students?
   createCohort(name) {
     const existingCohort = this.findCohort(name)
+    console.log('Existing cohort', existingCohort)
     if (!existingCohort) {
       this.cohorts.push(name)
       const lastElement = this.cohorts.length - 1
@@ -30,30 +31,40 @@ class CohortManager {
     }
   }
 
-  // is this accessing the students array?
-  // findStudent(givenName, familyName) {
-    
-  //   for (let index = 0; index < this.cohorts[students].length; index++) {
-  //     if (
-  //       this.cohorts[index].givenName === givenName &&
-  //       this.cohorts[index].familyName === familyName
-  //     ) {
-  //       return givenName, familyName
-  //     }
-  //   }
-  //   return false
-  // }
+  // return can only return one data structure, though that could be an object or array
 
-  // createStudent(givenName, familyName) {
-  //   const existingStudent = this.findStudent(givenName, familyName)
-  //   if (!existingStudent) {
-  //     this.cohorts.push(givenName, familyName)
-  //     const lastElement = this.cohorts.students[].length - 1
-  //     return this.cohorts[lastElement]
-  //   } else {
-  //     return `${givenName} ${familyName} already exists`
-  //   }
-  // }
+  findStudent(name, givenName, familyName) {
+    for (let i = 0; i < this.cohorts.length; i++) {
+      // const currentCohort = this.cohorts[i]
+
+      // console.log(this.students)
+
+      if (this.cohorts[i] === name) {
+        for (let j = 0; j < this.students.length; j++) {
+          if (
+            this.students[j].givenName === givenName &&
+            this.students[j].familyName === familyName
+          ) {
+            return this.students[j]
+          }
+        }
+        return false
+      }
+    }
+  }
+
+  createStudent(cohortName, givenName, familyName) {
+    const existingStudent = this.findStudent(cohortName, givenName, familyName)
+    if (!existingStudent) {
+      this.students.push({ cohortName, givenName, familyName })
+      const lastElement = this.students.length - 1
+      return this.students[lastElement]
+    } else {
+      return `${givenName} ${familyName} already exists`
+    }
+  }
 }
+
+// const cohortManager = new CohortManager
 
 module.exports = CohortManager

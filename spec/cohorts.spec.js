@@ -32,25 +32,46 @@ describe('cohorts', () => {
     expect(alert).toEqual(expected)
   })
 
-  // it('Add a student to a specific cohort', () => {
-  //   const expected = { givenName: 'Richard', familyName: 'Mattinson' }
+  it('Add a student to a specific cohort', () => {
+    const expected = {
+      cohortName: 'Cohort 6',
+      givenName: 'Richard',
+      familyName: 'Mattinson'
+    }
 
-  //   cohortManager.createCohort('Cohort 6')
-  //   cohortManager.createStudent('Richard', 'Mattinson')
+    const cohortName = cohortManager.createCohort(expected.cohortName)
+    const studentDetails = cohortManager.createStudent(
+      expected.cohortName,
+      expected.givenName,
+      expected.familyName
+    )
 
-  //   const result = cohortManager.getCohorts
-  //   expect(result).toEqual(expected)
-  // })
+    expect(cohortName).toEqual(expected.cohortName)
+    expect(studentDetails).toEqual(expected)
+  })
+
+  it('Alert when trying to add a cohort that already exists', () => {
+    const cohort = 'Cohort 6'
+    const givenName = 'Richard'
+    const familyName = 'Mattinson'
+    const expected = `${givenName} ${familyName} already exists`
+    cohortManager.createCohort(cohort)
+
+    cohortManager.createStudent(cohort, givenName, familyName)
+    const alert = cohortManager.createStudent(cohort, givenName, familyName)
+    console.log('Cohort Exisits', alert)
+    expect(alert).toEqual(expected)
+  })
 })
-
 
 // NESTED ARRAY EXAMPLE
 /* [
       {
         cohort: 'Cohort 6',
         student: [
-          { givenName: 'Richard', familyName: 'Mattinson' },
-          { givenName: 'John', familyName: 'Xander' }
+
+          { cohortName: 'Cohort 6', givenName: 'Richard', familyName: 'Mattinson' },
+          { cohortName: 'Cohort 6', givenName: 'John', familyName: 'Xander' }
         ]
       },
 
