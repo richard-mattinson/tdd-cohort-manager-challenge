@@ -34,32 +34,46 @@ describe('cohorts', () => {
 
   it('Add a student to a specific cohort', () => {
     const expected = {
-      cohortName: 'Cohort 6',
+      cohortNumber: 'Cohort 6',
+      id: '6-01',
       givenName: 'Richard',
-      familyName: 'Mattinson'
+      familyName: 'Mattinson',
+      github: 'richard.mattinson',
+      email: 'richard.mattinson@gmail'
     }
 
-    const cohortName = cohortManager.createCohort(expected.cohortName)
+    const cohortNumber = cohortManager.createCohort(expected.cohortNumber)
     const studentDetails = cohortManager.createStudent(
-      expected.cohortName,
+      expected.cohortNumber,
+      expected.id,
       expected.givenName,
-      expected.familyName
+      expected.familyName,
+      expected.github,
+      expected.email
     )
 
-    expect(cohortName).toEqual(expected.cohortName)
+    expect(cohortNumber).toEqual(expected.cohortNumber)
     expect(studentDetails).toEqual(expected)
   })
 
-  it('Alert when trying to add a cohort that already exists', () => {
-    const cohort = 'Cohort 6'
+  it('Alert when trying to add a student that already exists', () => {
+    const cohortName = 'Cohort 6'
+    const cohortNumber = 'Cohort 6'
+    const id = '6-01'
     const givenName = 'Richard'
     const familyName = 'Mattinson'
     const expected = `${givenName} ${familyName} already exists`
-    cohortManager.createCohort(cohort)
 
-    cohortManager.createStudent(cohort, givenName, familyName)
-    const alert = cohortManager.createStudent(cohort, givenName, familyName)
-    console.log('Cohort Exisits', alert)
+    cohortManager.createCohort(cohortName)
+    cohortManager.createStudent(cohortNumber, id, givenName, familyName)
+
+    const alert = cohortManager.createStudent(
+      cohortNumber,
+      id,
+      givenName,
+      familyName
+    )
+    // console.log('Cohort Exists', alert)
     expect(alert).toEqual(expected)
   })
 })
