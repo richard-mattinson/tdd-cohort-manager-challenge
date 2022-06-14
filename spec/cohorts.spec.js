@@ -6,6 +6,7 @@ describe('cohorts', () => {
     cohortManager = new CohortManager()
   })
 
+  // COHORTS
   it('Create a cohort with a cohort name', () => {
     const expected = 'Cohort 6'
     const result = cohortManager.createCohort(expected)
@@ -32,6 +33,18 @@ describe('cohorts', () => {
     expect(alert).toEqual(expected)
   })
 
+  it('Remove a cohort by cohort name', () => {
+    const expected = ['Cohort 6', 'Cohort 7']
+
+    cohortManager.createCohort('Cohort 5')
+    cohortManager.createCohort('Cohort 6')
+    cohortManager.createCohort('Cohort 7')
+
+    const remainingCohorts = cohortManager.removeCohort('Cohort 5')
+    expect(remainingCohorts).toEqual(expected)
+  })
+
+  // STUDENTS
   it('Add a student to a specific cohort', () => {
     const expected = {
       cohortNumber: 'Cohort 6',
@@ -77,7 +90,6 @@ describe('cohorts', () => {
     expect(alert).toEqual(expected)
   })
 })
-
 // NESTED ARRAY EXAMPLE
 /* [
       {
